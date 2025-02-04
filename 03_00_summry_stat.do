@@ -14,4 +14,5 @@ replace international = 1 if nonresident_alien_flag == "Y"
 
 tab yr_num international if international == 1
 
+
 tab country_of_origin
