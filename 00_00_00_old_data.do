@@ -1,23 +1,3 @@
-*
-import excel "Broad_Dollar_Indexes.xlsx", clear firstrow
-gen year = year(Period)
-
-drop if year < 2009
-drop if year > 2019
-drop Period
-
-egen xrate_b = mean(RealBroadMonthly) , by(year)
-egen xrate_d = mean(RealAFEMonthly) , by(year)
-egen xrate_u = mean(RealEMEMonthly) , by(year)
-
-drop RealBroadMonthly
-drop RealAFEMonthly
-drop RealEMEMonthly
-
-bysort year :keep if _n==1
-
-save "index", replace
-
 import delimited "102.csv", clear
 
 rename totalpriceforoutofstatestudentsl cost_2022

@@ -1,12 +1,17 @@
 ********************************************************************************
 * Merge OLDA data
 ********************************************************************************
-
+local main “$mydir\clean_ex\clean_main.dta”
 local race “$mydir\clean_ex\clean_race.dta”
 local term_index “$mydir\clean_ex\term_index.dta”
 
 * open race data
-use `race’ , clear
+use `main’ , clear
+
+* merge main with race
+merge m:1 person_key using `race’
+keep if _merge == 3
+drop _merge
 
 * merge main and Index
 rename fiscal_year yr_num
