@@ -20,18 +20,24 @@ replace international = 1 if nonresident_alien_flag == "Y"
 
 rename yr_num year
 
+gen international_ch = 1 if country_of_origin == "CH"
+gen international_in = 1 if country_of_origin == "IN"
+gen international_kr = 1 if country_of_origin == "KS"
+
 * graph 
-collapse (count) international if international == 1, by(year)
+collapse (count) international international_ch international_in international_kr if international == 1, by(year)
 *twoway (line international year, sort)
 
 destring year, replace
 d year
-*tab country_of_origin
 
 ********************************************************************************
 * Show Exchange_rate change by year
 
 local d_index “$mydir\clean_ex\dollar_index.dta”
+local d_index_ch “$mydir\clean_ex\dollar_index_ch.dta”
+local d_index_in “$mydir\clean_ex\dollar_index_in.dta”
+local d_index_kr “$mydir\clean_ex\dollar_index_kr.dta”
 
 * open d_index data
 
@@ -43,5 +49,17 @@ drop _merge
 *twoway (line xrate_b year)
 *twoway (line xrate_d year)
 *twoway (line xrate_u year)
+
+merge 1:1 year using `d_index_ch' 
+keep if _merge == 3
+drop _merge
+
+merge 1:1 year using `d_index_in' 
+keep if _merge == 3
+drop _merge
+
+merge 1:1 year using `d_index_kr' 
+keep if _merge == 3
+drop _merge
 
 save "\\chrr\vr\profiles\syang\Desktop\clean_ex\main_index.dta",replace
