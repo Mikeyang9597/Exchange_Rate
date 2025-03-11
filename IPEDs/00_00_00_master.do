@@ -18,8 +18,8 @@ if "`user'" == "mike" {
 }	
 
 else if "`user'" == "lucas" {
-	global 	datadir 
-	global 	codedir 	
+	global 	datadir "C:\Users\vkbostwick\Dropbox\DoubleMajor_Data"
+	global 	codedir 	"C:\Users\vkbostwick\Documents\GitHub\Returns-to-Double-Majors"
 }	
 
 ****Eventually put all do files in order here so whole project can run from this one file:****

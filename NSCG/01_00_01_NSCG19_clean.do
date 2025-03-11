@@ -1,13 +1,14 @@
-*NSCG *2019 *Exchange_rage
+*IPED *Exchange_rage
 clear
 
-* This do file will clean up the raw NSCG19 data and save cleaned NSCG19 files for the main analysis and robustness checks.
+* This do file will clean up the raw IPEDs data and save cleaned IPEDs files for the main analysis and robustness checks.
 
 * Specify name for input files (Raw ACS data in)
-local NSCG19_raw_in "$datadir/raw_data/epcg19.sas7bdat"
+local IPEDs "$datadir/raw_data/IPEDs_data/ef90_hd_data_stata.csv"
 
-*Import 2021 NSCG DATA
-import sas using `NSCG19_raw_in'
+*Import IPEDs DATA
+import delimited `IPEDs', clear
+
 
 tab FNCCD CTZDUAL
 
