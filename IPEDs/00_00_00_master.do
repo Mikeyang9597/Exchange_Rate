@@ -14,7 +14,7 @@ local user mike
 
 if "`user'" == "mike" {
 	global 	datadir "/Users/mikeyang/Dropbox/Exchange_Rate"
-	global 	codedir 	"/Users/mikeyang/Documents/Exchange_Rate"
+	global 	codedir 	"/Users/mikeyang/Documents/Exchange_Rate/IPEDs"
 }	
 
 else if "`user'" == "lucas" {
@@ -24,4 +24,4 @@ else if "`user'" == "lucas" {
 
 ****Eventually put all do files in order here so whole project can run from this one file:****
 
-*do "$codedir/data_cleaning_acs.do"
+do "$codedir/00_00_01_clean_IPEDs_1990.do"
