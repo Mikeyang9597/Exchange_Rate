@@ -24,4 +24,5 @@ else if "`user'" == "lucas" {
 
 ****Eventually put all do files in order here so whole project can run from this one file:****
 
-do "$codedir/00_00_01_clean_IPEDs_1990.do"
+do "$codedir/00_00_01_clean_tuition.do"
+do "$codedir/00_00_02_clean_grad.do"
