@@ -1,11 +1,12 @@
 ********************************************************************************
 *Term Index
-import excel “$mydir\raw\termindex_new”,firstrow clear
+import excel "$mydir\raw\termindex_new",firstrow clear
 
-save “\\chrr\vr\profiles\syang\Desktop\clean_ex\term_index.dta”,replace
+save "\\chrr\vr\profiles\syang\Desktop\clean_ex\term_index.dta",replace
 ********************************************************************************
 *Dollar Index
-import excel “$mydir\raw\dollar_index”,firstrow clear
+import excel "$mydir\raw\dollar_index",firstrow clear
+
 
 *gen index by year
 destring Period, replace
@@ -17,27 +18,18 @@ replace year = "19" + year_ if real(year_) > 20
 
 egen xrate_b = mean(RealBroadMonthly/100) , by(year)
 egen xrate_d = mean(RealAFEMonthly/100) , by(year)
-egen xrate_u = mean(RealEMEMonthly/100) , by(year)
 
-* keep 1 index per year
-bysort year :keep if _n==1
-
-destring year, replace
-
-recast double year
-
-*drop
-drop RealBroadMonthly
+@@ -31,65 +29,7 @@ drop RealBroadMonthly
 drop RealAFEMonthly
 drop RealEMEMonthly
 drop Period
 drop year_
 
-save “\\chrr\vr\profiles\syang\Desktop\clean_ex\dollar_index.dta”,replace
+save "\\chrr\vr\profiles\syang\Desktop\clean_ex\dollar_index.dta",replace
 ********************************************************************************
 
 *Dollar Index
-import excel “$mydir\raw\dollar_index_ch”,firstrow clear
+import excel "$mydir\raw\dollar_index_ch",firstrow clear
 
 gen year = substr(observation_date, -4, .)
 
@@ -54,10 +46,10 @@ destring year, replace
 
 recast double year
 
-save “\\chrr\vr\profiles\syang\Desktop\clean_ex\dollar_index_ch.dta”,replace
+save "\\chrr\vr\profiles\syang\Desktop\clean_ex\dollar_index_ch.dta",replace
 ********************************************************************************
 
-import excel “$mydir\raw\dollar_index_in”,firstrow clear
+import excel "$mydir\raw\dollar_index_in",firstrow clear
 
 gen year = substr(observation_date, -4, .)
 
@@ -73,9 +65,9 @@ bysort year :keep if _n==1
 destring year, replace
 
 recast double year
-save “\\chrr\vr\profiles\syang\Desktop\clean_ex\dollar_index_in.dta”,replace
+save "\\chrr\vr\profiles\syang\Desktop\clean_ex\dollar_index_in.dta",replace
 ********************************************************************************
-import excel “$mydir\raw\dollar_index_kr”,firstrow clear
+import excel "$mydir\raw\dollar_index_kr",firstrow clear
 
 gen year = substr(observation_date, -4, .)
 
@@ -91,5 +83,5 @@ bysort year :keep if _n==1
 destring year, replace
 
 recast double year
-save “\\chrr\vr\profiles\syang\Desktop\clean_ex\dollar_index_kr.dta”,replace
+save "\\chrr\vr\profiles\syang\Desktop\clean_ex\dollar_index_kr.dta",replace
 ********************************************************************************

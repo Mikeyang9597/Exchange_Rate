@@ -26,3 +26,5 @@ else if "`user'" == "lucas" {
 
 do "$codedir/00_00_01_clean_tuition.do"
 do "$codedir/00_00_02_clean_grad.do"
+do "$codedir/00_01_01_index.do"
+do "$codedir/01_01_01_merge.do"

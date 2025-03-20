@@ -17,10 +17,7 @@ rename Year year
 * Keep only tuiton data
 keep uni grad year
 drop if grad == .
-bysort uni year (grad): keep if _n == 1
-
-* Reshape it
-reshape wide grad, i(uni) j(year)
+collapse (sum) grad, by(uni year)
 
 * save cleaned tuiton data
 save `IPEDs_out', replace
