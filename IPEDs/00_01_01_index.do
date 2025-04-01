@@ -2,20 +2,19 @@
 * this do file will import exchange index data and save cleaned index data
 
 * Index
-local index_in "$datadir/Index/Broad_Dollar_Indexes.xlsx"
+local index_in "$datadir/Index/RealBroadDollarIndex_1973-2025.csv"
 
 * Out
 local index_out "$datadir/intermediate_data/Clean_index.dta"
 
 * Import Dollar Index
-import excel `index_in' , firstrow clear
+import delimited `index_in', clear
 
 *gen year
-gen year = year(Period)
+gen year = real("19" + substr(date, 5, 2))
+replace year = real("20" + substr(date, 5, 2)) if year < 1950
 
-egen xrate_b = mean(RealBroadMonthly/100) , by(year)
-egen xrate_d = mean(RealAFEMonthly/100) , by(year)
-egen xrate_u = mean(RealEMEMonthly/100) , by(year)
+egen xrate = mean(rbdi/100), by (year)
 
 * keep 1 index per year
 bysort year :keep if _n==1
@@ -24,11 +23,7 @@ destring year, replace
 
 recast double year
 
-*drop
-drop RealBroadMonthly
-drop RealAFEMonthly
-drop RealEMEMonthly
-drop Period
+drop rbdi
 
 save `index_out',replace
 
